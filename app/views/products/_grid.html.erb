@@ -1,0 +1,19 @@
+<%= grid(@products_grid) do |g|
+
+  g.column name:  'ID', attribute: 'id'
+
+  g.column name: 'Code', attribute: 'code'
+
+  g.column name:  'Name', attribute: 'name'
+
+  g.column  name:  'Description', attribute: 'description'
+
+  g.column name:  'Category', attribute: 'name', model:'Category' do |product|
+    product.category.name unless product.category.nil?
+  end
+
+
+  g.column   do |product|
+    link_to('Edit', edit_product_path(product))
+  end
+end -%>
