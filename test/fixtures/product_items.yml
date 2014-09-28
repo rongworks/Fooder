@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  quantity: 1
+  last_check_in: 2014-09-28 12:18:49
+  last_checkout: 2014-09-28 12:18:49
+
+two:
+  code: MyString
+  quantity: 1
+  last_check_in: 2014-09-28 12:18:49
+  last_checkout: 2014-09-28 12:18:49

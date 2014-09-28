@@ -62,13 +62,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def check_in #TODO: do something useful
-    code = params[:code]
-    puts "yay: #{code}"
-    @product = Product.find_by_code(code)
-    redirect_to @product
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

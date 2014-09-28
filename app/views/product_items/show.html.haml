@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @product_item.code
+%p
+  %b Quantity:
+  = @product_item.quantity
+%p
+  %b Last check in:
+  = @product_item.last_check_in
+%p
+  %b Last checkout:
+  = @product_item.last_checkout
+
+= link_to 'Edit', edit_product_item_path(@product_item)
+\|
+= link_to 'Back', product_items_path

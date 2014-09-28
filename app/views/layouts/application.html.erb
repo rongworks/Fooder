@@ -10,7 +10,7 @@
 <div id="nav_head">
   <%= link_to Product.model_name.human(count:2), products_path %>
   <%= link_to Category.model_name.human(count:2), categories_path %>
-
+  <%= link_to 'Inventory', product_items_path %>
 
 </div>
 <%= yield %>

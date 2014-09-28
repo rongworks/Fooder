@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :products do
+  resources :product_items do
     collection do
       get :check_in
     end
   end
+
+  resources :products
 
   resources :categories
 
