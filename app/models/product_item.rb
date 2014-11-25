@@ -9,7 +9,9 @@ class ProductItem < ActiveRecord::Base
       return product_item
     else
       product = Product.find_by_code(code) || Product.new(code: code, name: 'unknown')
-      return ProductItem.new({code: code, quantity: 1,last_check_in: Time.now})
+      puts product.name
+      product.save! if product.new_record?
+      return ProductItem.new({code: code, quantity: 1,last_check_in: Time.now, product: product})
     end
   end
 end
