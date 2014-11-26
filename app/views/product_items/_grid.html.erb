@@ -1,0 +1,17 @@
+<%= grid(@product_items_grid) do |g|
+
+  g.column name: 'Code', attribute: 'code'
+
+  g.column name:  'Name', model: 'Product', attribute: 'name' do |product_item|
+    link_to product_item.product.name, product_item.product
+  end
+
+  g.column  name:  'last checkin', attribute: 'last_check_in'
+
+  g.column name:  'last checkout', attribute: 'last_checkout'
+
+
+  g.column   do |product_item|
+    link_to('Edit', edit_product_item_path(product_item))
+  end
+end -%>

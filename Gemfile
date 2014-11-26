@@ -40,6 +40,7 @@ gem 'spring',        group: :development
 
 gem 'haml'
 gem 'haml-rails'
+gem 'jquery-ui-rails'
 
 gem 'wice_grid'
 gem 'simple_form'

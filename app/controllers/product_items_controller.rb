@@ -5,6 +5,7 @@ class ProductItemsController < ApplicationController
   # GET /product_items.json
   def index
     @product_items = ProductItem.all
+    @product_items_grid = initialize_grid(@product_items, include: [:product])
   end
 
   # GET /product_items/1
