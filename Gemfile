@@ -46,3 +46,4 @@ gem 'wice_grid'
 gem 'simple_form'
 
 gem 'advanced_haml_scaffold_generator'
+gem 'devise'
