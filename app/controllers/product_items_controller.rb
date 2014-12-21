@@ -5,8 +5,9 @@ class ProductItemsController < ApplicationController
   # GET /product_items
   # GET /product_items.json
   def index
-    @product_items = ProductItem.all
+    @product_items = current_user.product_items
     @product_items_grid = initialize_grid(@product_items, include: [:product])
+    @product_item = ProductItem.new
   end
 
   # GET /product_items/1
@@ -26,11 +27,11 @@ class ProductItemsController < ApplicationController
   # POST /product_items
   # POST /product_items.json
   def create
-    @product_item = ProductItem.new(product_item_params)
+    @product_item = ProductItem.check_in(product_item_params[:code],current_user.id)
 
     respond_to do |format|
       if @product_item.save
-        format.html { redirect_to @product_item, notice: 'Product item was successfully created.' }
+        format.html { redirect_to product_items_path, notice: 'Product item was successfully created.' }
         format.json { render :show, status: :created, location: @product_item }
       else
         format.html { render :new }
@@ -66,7 +67,7 @@ class ProductItemsController < ApplicationController
   def check_in #TODO: do something useful
     code = params[:code]
     puts "yay: #{code}"
-    @product_item = ProductItem.check_in(code)
+    @product_item = ProductItem.check_in(code, current_user)
     if @product_item.save
       flash[:notice] = 'Check-In successful'
       redirect_to @product_item
@@ -84,6 +85,6 @@ class ProductItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_item_params
-      params.require(:product_item).permit(:code, :quantity, :last_check_in, :last_checkout)
+      params.require(:product_item).permit(:code, :quantity, :last_check_in, :last_checkout, :product_id, :user_id)
     end
 end
