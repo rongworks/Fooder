@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     end
   end
 
+
+  scope :format => true, :constraints => { :format => 'json' } do
+    post 'check_in', to: 'api#check_in'
+    post 'check_out', to: 'api#check_out'
+  end
+
   resources :products
 
   resources :categories
