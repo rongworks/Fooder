@@ -9,12 +9,17 @@ class ApiController < ApplicationController
   def check_in
     user = ApiKey.get_user(@token)
     product_item = ProductItem.check_in(params[:code],user.id)
-    product_item.save! #TODO: check
-    respond_with product_item
+    if product_item.save
+      respond_with product_item
+    else
+      render json: product_item.errors, status: :unprocessable_entity
+    end
   end
 
   def check_out
-
+    user = ApiKey.get_user(@token)
+    product_item = ProductItem.check_out(params[:code],user.id)
+    respond_with product_item
   end
 
   private
