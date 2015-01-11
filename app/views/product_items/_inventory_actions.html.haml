@@ -1,0 +1,9 @@
+%fieldset#check_ins
+  %legend
+    Check In / Out
+  = form_tag('') do
+    =select_tag 'method_select', options_for_select([['Check in','bulk_check_in'],['Check out','bulk_check_out']]), id: 'select_check'
+    %p.add_code Add Code
+    = text_field_tag 'codes[]','',class: 'code_field'
+    //= submit_tag 'Check-In'
+    %p#code_submit Ladida

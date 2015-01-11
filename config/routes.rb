@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :product_items do
     collection do
-      get :check_in
+      post :check_in
+      post :check_out
+      post :bulk_check_in
+      post :bulk_check_out
     end
   end
 

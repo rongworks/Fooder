@@ -1,4 +1,6 @@
 class ProductItemsController < ApplicationController
+  respond_to :html, :js, :json
+
   before_action :set_product_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -64,17 +66,52 @@ class ProductItemsController < ApplicationController
     end
   end
 
-  def check_in #TODO: do something useful
-    code = params[:code]
-    puts "yay: #{code}"
-    @product_item = ProductItem.check_in(code, current_user)
-    if @product_item.save
-      flash[:notice] = 'Check-In successful'
-      redirect_to @product_item
-    else
-      flash[:error] = 'Check-In failed'
-      redirect_to :back
+  def bulk_check_in
+    check_ins = 0
+    items = []
+    codes = params[:codes]
+    codes.each do |code|
+      @product_item = ProductItem.check_in(code, current_user.id)
+      if @product_item.save
+        check_ins += 1
+        items << @product_item
+      else
+        flash[:notice] = "Error on code #{code}, could not check in. #{@product_item.errors.full_messages}"
+        puts "Could not save item, #{@product_item.errors.full_messages}"
+      end
     end
+    respond_with items, status: 200, location: product_items_path
+
+  end
+
+  def bulk_check_out
+    check_outs = 0
+    items = []
+    codes = params[:codes]
+    codes.each do |code|
+      @product_item = ProductItem.check_out(code, current_user.id)
+      if @product_item.save
+        check_outs += 1
+        items << @product_item
+      else
+        flash[:notice] = "Error on code #{code}, could not check out"
+      end
+    end
+    respond_with items, status: 200, location: product_items_path
+  end
+
+  def check_in
+    code = params[:code]
+    @product_item = ProductItem.check_in(code, current_user)
+    flash[:notice] = 'Check-In successful' if @product_item.save
+    respond_with(@product_item)
+  end
+
+  def check_out
+    code = params[:code]
+    @product_item = ProductItem.check_out(code, current_user)
+    flash[:notice] = 'Check-Out successful' if @product_item.save
+    respond_with(@product_item)
   end
 
   private
