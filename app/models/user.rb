@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   before_create :get_api_key
 
   def get_api_key
-    ApiKey.new(user: self).save!
+    ApiKey.new(user: self).save
+    true
   end
 end
