@@ -17,7 +17,7 @@ $(document).ready ->
 
 
   $(".code_field").bind "keydown", (event) ->
-    if event.which is 13
+    if event.which is 13 #TODO: doesnt work
       event.stopPropagation()
       event.preventDefault()
       $(this).nextAll(".code_field").eq(0).focus()
