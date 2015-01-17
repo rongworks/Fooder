@@ -48,5 +48,6 @@ gem 'simple_form'
 gem 'advanced_haml_scaffold_generator'
 gem 'devise'
 
+# Heroku related
 gem 'rails_12factor', group: :production
-gem 'pg', group: :development
+gem 'pg', group: :production
